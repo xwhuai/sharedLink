@@ -65,39 +65,46 @@ jobs:
         with:
           name: macOS-sharedLink-latest.app
           path: build/jpackage/*.app
+          if-no-files-found: ignore
 
       - name: Upload mac dmg as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: macOS-sharedLink-latest.dmg
           path: build/jpackage/*.dmg
+          if-no-files-found: ignore
 
       - name: Upload mac pkg as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: macOS-sharedLink-latest.pkg
           path: build/jpackage/*.pkg
+          if-no-files-found: ignore
 
       - name: Upload windows exe as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-sharedLink-latest.exe
           path: build/jpackage/*.exe
+          if-no-files-found: ignore
 
       - name: Upload windows msi as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-sharedLink-latest.msi
           path: build/jpackage/*.msi
+          if-no-files-found: ignore
 
       - name: Upload ubuntu deb as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: ubuntu-sharedLink-latest.deb
           path: build/jpackage/*.deb
+          if-no-files-found: ignore
 
       - name: Upload ubuntu rpm as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: ubuntu-sharedLink-latest.rpm
           path: build/jpackage/*.rpm
+          if-no-files-found: ignore
