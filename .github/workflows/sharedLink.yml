@@ -41,41 +41,41 @@ jobs:
       - name: Upload mac app as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-1.0.0.app
+          name: macOS-sharedLink-${{ env.VERSION }}.app
           path: build/jpackage/*.app
 
       - name: Upload mac dmg as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-1.0.0.dmg
+          name: macOS-sharedLink-${{ env.VERSION }}.dmg
           path: build/jpackage/*.dmg
 
       - name: Upload mac pkg as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-1.0.0.pkg
+          name: macOS-sharedLink-${{ env.VERSION }}.pkg
           path: build/jpackage/*.pkg
 
       - name: Upload windows exe as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-sharedLink-1.0.0.exe
+          name: windows-sharedLink-${{ env.VERSION }}.exe
           path: build/jpackage/*.exe
 
       - name: Upload windows msi as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-sharedLink-1.0.0.msi
+          name: windows-sharedLink-${{ env.VERSION }}.msi
           path: build/jpackage/*.msi
 
       - name: Upload deb as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-sharedLink-1.0.0.deb
+          name: ubuntu-sharedLink-${{ env.VERSION }}.deb
           path: build/jpackage/*.deb
 
       - name: Upload rpm as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-sharedLink-1.0.0.rpm
+          name: ubuntu-sharedLink-${{ env.VERSION }}.rpm
           path: build/jpackage/*.rpm
