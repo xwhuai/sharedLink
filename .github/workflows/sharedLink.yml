@@ -13,15 +13,25 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v4
 
+      - name: Get Project Version (Linux/macOS)
+        if: runner.os != 'Windows'
+        id: get_version_unix
+        run: echo "VERSION=$(./gradlew -q printVersion | tail -n 1)" >> $GITHUB_ENV
+
+      - name: Get Project Version (Windows)
+        if: runner.os == 'Windows'
+        id: get_version_windows
+        shell: powershell
+        run: |
+          $version = ./gradlew -q printVersion
+          $version = $version.Trim()
+          echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
-
-      - name: Get Project Version
-        id: get_version
-        run: echo "VERSION=$(./gradlew -q printVersion | tail -n 1)" >> $GITHUB_ENV
 
       - name: Echo JAVA_HOME
         run: echo $JAVA_HOME
