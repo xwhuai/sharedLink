@@ -23,26 +23,31 @@ jobs:
         uses: gradle/wrapper-validation-action@v3
       - name: Execute build
         run: ./gradlew --info --stacktrace build
-      - name: Execute runtime
-        run: ./gradlew --info --stacktrace runtime
+      - name: Execute jlink
+        run: ./gradlew --info --stacktrace jlink
       - name: Execute jpackage
         run: ./gradlew --info --stacktrace jpackage
-      - name: Upload dmg as an artifact
+      - name: Upload mac app as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharedLink-jdk${{ matrix.java }}-${{ matrix.os }}-app
+          path: build/jpackage/*.app
+      - name: Upload mac dmg as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: sharedLink-jdk${{ matrix.java }}-${{ matrix.os }}-dmg
           path: build/jpackage/*.dmg
-      - name: Upload pkg as an artifact
+      - name: Upload mac pkg as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: sharedLink-jdk${{ matrix.java }}-${{ matrix.os }}-pkg
           path: build/jpackage/*.pkg
-      - name: Upload exe as an artifact
+      - name: Upload windows exe as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: sharedLink-jdk${{ matrix.java }}-${{ matrix.os }}-exe
           path: build/jpackage/*.exe
-      - name: Upload msi as an artifact
+      - name: Upload windows msi as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: sharedLink-jdk${{ matrix.java }}-${{ matrix.os }}-msi
