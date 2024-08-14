@@ -1,12 +1,12 @@
-# 由于action里使用MacOS版本是ARM架构的，打包出来有问题，所以mac的包由本地打包，不通过action
-name: Shared Link
+# 测试用的构建脚本，由于action里使用MacOS版本是ARM架构的，打包出来有问题，所以mac的包由本地打包，不通过action
+name: Shared Link test
 on: [ workflow_dispatch ]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest, macOS-latest, windows-latest ]
         java: [ '17' ]
       fail-fast: false
     name: Build on ${{ matrix.os }}
@@ -59,6 +59,24 @@ jobs:
 
       - name: Execute jpackage
         run: ./gradlew --info --stacktrace jpackage
+
+      - name: Upload mac app as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-sharedLink-latest.app
+          path: build/jpackage/*.app
+
+      - name: Upload mac dmg as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-sharedLink-latest.dmg
+          path: build/jpackage/*.dmg
+
+      - name: Upload mac pkg as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-sharedLink-latest.pkg
+          path: build/jpackage/*.pkg
 
       - name: Upload windows exe as an artifact
         uses: actions/upload-artifact@v4
