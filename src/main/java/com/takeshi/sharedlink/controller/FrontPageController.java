@@ -1,6 +1,7 @@
 package com.takeshi.sharedlink.controller;
 
 import com.takeshi.sharedlink.SharedLinkApplication;
+import com.takeshi.sharedlink.util.SecurityUtils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 public class FrontPageController {
 
@@ -28,6 +30,27 @@ public class FrontPageController {
 
     @FXML
     private TextField cidField;
+
+    private Preferences preferences;
+
+    private final String COOKIE = "cookie";
+
+    private final String CID = "cid";
+
+    @FXML
+    public void initialize() {
+        preferences = Preferences.userNodeForPackage(FrontPageController.class);
+        // 加载保存的cookie和cid到TextField
+        String decryptCookie = "", decryptCid = "";
+        try {
+            decryptCookie = SecurityUtils.decrypt(preferences.get(COOKIE, ""));
+            decryptCid = SecurityUtils.decrypt(preferences.get(CID, ""));
+        } catch (Exception ignored) {
+
+        }
+        cookieField.setText(decryptCookie);
+        cidField.setText(decryptCid);
+    }
 
     @FXML
     private synchronized void onNextButtonClick(ActionEvent event) {
@@ -50,6 +73,9 @@ public class FrontPageController {
                     });
                     return;
                 }
+                // 保存cookie和cid到Preferences
+                preferences.put(COOKIE, SecurityUtils.encrypt(cookie));
+                preferences.put(CID, SecurityUtils.encrypt(cid));
                 FXMLLoader loader = new FXMLLoader(SharedLinkApplication.class.getResource("sharedLink-view.fxml"));
                 Scene sharedLinkScene = new Scene(loader.load());
                 try {

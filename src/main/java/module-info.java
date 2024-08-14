@@ -5,6 +5,7 @@ module com.takeshi.sharedlink {
     requires org.controlsfx.controls;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires java.prefs;
 
     opens com.takeshi.sharedlink to javafx.fxml;
     exports com.takeshi.sharedlink;

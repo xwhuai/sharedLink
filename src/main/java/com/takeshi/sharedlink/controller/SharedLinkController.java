@@ -72,10 +72,6 @@ public class SharedLinkController {
 
     @FXML
     public synchronized void onReturnButtonClick() throws IOException {
-        this.sharedLinkTextArea.setText("");
-        this.logTextFlow.getChildren().removeAll();
-        this.userNameLabel.setText("");
-        this.userData = null;
         FXMLLoader loader = new FXMLLoader(SharedLinkApplication.class.getResource("frontPage-view.fxml"));
         Scene frontPageScene = new Scene(loader.load());
         Stage stage = (Stage) this.userNameLabel.getScene().getWindow();

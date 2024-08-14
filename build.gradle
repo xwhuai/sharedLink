@@ -16,7 +16,7 @@ repositories {
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
@@ -31,14 +31,8 @@ javafx {
 }
 
 dependencies {
-    implementation('org.controlsfx:controlsfx:11.1.2')
+    implementation 'org.controlsfx:controlsfx:11.1.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0' // 添加 Jackson 依赖
-}
-
-tasks.register('printVersion') {
-    doLast {
-        println project.version
-    }
 }
 
 jlink {
