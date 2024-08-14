@@ -24,7 +24,7 @@ jobs:
       - name: Get version from Gradle
         id: get_version
         run: |
-          APPLICATION_VERSION=$(./gradlew getVersion -q)
+          APPLICATION_VERSION=$(./gradlew getVersion --no-daemon -q)
           echo "APPLICATION_VERSION=$APPLICATION_VERSION" >> $GITHUB_ENV
       - name: Execute build
         run: ./gradlew --info --stacktrace build
