@@ -51,12 +51,6 @@ jobs:
       - name: Verify Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v4
 
-      - name: Execute build
-        run: ./gradlew --info --stacktrace build
-
-      - name: Execute jlink
-        run: ./gradlew --info --stacktrace jlink
-
       - name: Execute jpackage
         run: ./gradlew --info --stacktrace jpackage
 
