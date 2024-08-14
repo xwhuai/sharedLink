@@ -1,0 +1,6 @@
+/* styles.css */
+.next-button {
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-font-size: 18px; /* 字体大小 */
+}

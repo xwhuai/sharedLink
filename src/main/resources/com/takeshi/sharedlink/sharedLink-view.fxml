@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.takeshi.sharedlink.controller.SharedLinkController"
+           stylesheets="@styles.css">
+    <GridPane alignment="CENTER" hgap="10" vgap="10">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+
+        <Label text="帐号昵称:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="userNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Button text="返回" onAction="#onReturnButtonClick" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                GridPane.halignment="RIGHT"/>
+
+        <Label text="分享链接:" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1"/>
+        <TextArea fx:id="sharedLinkTextArea" promptText="请输入需要转存的115网盘分享链接，换行可添加多个"
+                  GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" prefRowCount="5"
+                  wrapText="true"/>
+
+        <Label text="转存日志:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Button text="开始转存" onAction="#onSaveLinkFromText" GridPane.columnIndex="2" GridPane.rowIndex="3"
+                GridPane.halignment="RIGHT"/>
+
+        <ScrollPane GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="4" fitToWidth="true"
+                    prefHeight="200">
+            <TextFlow fx:id="logTextFlow"/>
+        </ScrollPane>
+
+        <columnConstraints>
+            <ColumnConstraints minWidth="40"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints halignment="RIGHT"/>
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+    </GridPane>
+
+    <!-- 遮罩层 -->
+    <Pane fx:id="mask" visible="false" StackPane.alignment="CENTER"/>
+    <ProgressIndicator fx:id="loadingIndicator" visible="false" StackPane.alignment="CENTER"/>
+</StackPane>

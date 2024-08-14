@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.javamodularity.moduleplugin' version '1.8.12'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.beryx.jlink' version '3.0.1'
+}
+
+group 'com.takeshi'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainModule = 'com.takeshi.sharedlink'
+    mainClass = 'com.takeshi.sharedlink.SharedLinkApplication'
+}
+
+javafx {
+    version = '17.0.6'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation('org.controlsfx:controlsfx:11.1.2')
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0' // 添加 Jackson 依赖
+}
+
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'sharedLink'
+    }
+    jpackage {
+        icon = 'src/main/resources/icons/macIcon.icns'
+    }
+}
+
+jlinkZip {
+    group = 'distribution'
+}
