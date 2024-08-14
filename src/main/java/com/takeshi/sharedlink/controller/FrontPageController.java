@@ -77,7 +77,7 @@ public class FrontPageController {
                 preferences.put(COOKIE, SecurityUtils.encrypt(cookie));
                 preferences.put(CID, SecurityUtils.encrypt(cid));
                 FXMLLoader loader = new FXMLLoader(SharedLinkApplication.class.getResource("sharedLink-view.fxml"));
-                Scene sharedLinkScene = new Scene(loader.load());
+                Scene sharedLinkScene = new Scene(loader.load(), 640, 480);
                 try {
                     SharedLinkController sharedLinkController = loader.getController();
                     sharedLinkController.setUserData(cookie, cid);

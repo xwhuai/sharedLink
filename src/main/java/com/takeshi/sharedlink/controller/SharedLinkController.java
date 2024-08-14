@@ -73,7 +73,7 @@ public class SharedLinkController {
     @FXML
     public synchronized void onReturnButtonClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(SharedLinkApplication.class.getResource("frontPage-view.fxml"));
-        Scene frontPageScene = new Scene(loader.load());
+        Scene frontPageScene = new Scene(loader.load(), 640, 480);
         Stage stage = (Stage) this.userNameLabel.getScene().getWindow();
         stage.setScene(frontPageScene);
         stage.show();
