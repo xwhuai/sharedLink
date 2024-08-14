@@ -13,9 +13,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-}
-
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
@@ -36,6 +33,12 @@ javafx {
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.2')
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0' // 添加 Jackson 依赖
+}
+
+tasks.register('getVersion') {
+    doLast {
+        println "${version}"
+    }
 }
 
 jlink {
