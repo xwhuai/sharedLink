@@ -16,7 +16,7 @@
                    GridPane.rowIndex="0"/>
 
         <Label text="cid:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="cidField" promptText="请输入要转存的cid，留空则默认转存到【我的接受】目录"
+        <TextField fx:id="cidField" promptText="请输入要转存的目标目录的cid，留空则默认转存到【我的接受】目录"
                    GridPane.columnIndex="1"
                    GridPane.rowIndex="1"/>
 
