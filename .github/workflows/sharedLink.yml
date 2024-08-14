@@ -12,58 +12,70 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
+
+      - name: Get Project Version
+        id: get_version
+        run: echo "VERSION=$(./gradlew -q printVersion | tail -n 1)" >> $GITHUB_ENV
+
       - name: Echo JAVA_HOME
         run: echo $JAVA_HOME
+
       - name: Verify Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
-      - name: Get version from Gradle
-        id: get_version
-        run: |
-          APPLICATION_VERSION=$(./gradlew getVersion --no-daemon -q)
-          echo "APPLICATION_VERSION=$APPLICATION_VERSION" >> $GITHUB_ENV
+        uses: gradle/actions/wrapper-validation@v4
+
       - name: Execute build
         run: ./gradlew --info --stacktrace build
+
       - name: Execute jlink
         run: ./gradlew --info --stacktrace jlink
+
       - name: Execute jpackage
         run: ./gradlew --info --stacktrace jpackage
+
       - name: Upload mac app as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-${{ env.APPLICATION_VERSION }}.app
+          name: macOS-sharedLink-1.0.0.app
           path: build/jpackage/*.app
+
       - name: Upload mac dmg as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-${{ env.APPLICATION_VERSION }}.dmg
+          name: macOS-sharedLink-1.0.0.dmg
           path: build/jpackage/*.dmg
+
       - name: Upload mac pkg as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-sharedLink-${{ env.APPLICATION_VERSION }}.pkg
+          name: macOS-sharedLink-1.0.0.pkg
           path: build/jpackage/*.pkg
+
       - name: Upload windows exe as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-sharedLink-${{ env.APPLICATION_VERSION }}.exe
+          name: windows-sharedLink-1.0.0.exe
           path: build/jpackage/*.exe
+
       - name: Upload windows msi as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows-sharedLink-${{ env.APPLICATION_VERSION }}.msi
+          name: windows-sharedLink-1.0.0.msi
           path: build/jpackage/*.msi
+
       - name: Upload deb as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-sharedLink-${{ env.APPLICATION_VERSION }}.deb
+          name: ubuntu-sharedLink-1.0.0.deb
           path: build/jpackage/*.deb
+
       - name: Upload rpm as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-sharedLink-${{ env.APPLICATION_VERSION }}.rpm
+          name: ubuntu-sharedLink-1.0.0.rpm
           path: build/jpackage/*.rpm

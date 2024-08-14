@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.takeshi'
-version '1.0'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -35,9 +35,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0' // 添加 Jackson 依赖
 }
 
-tasks.register('getVersion') {
+tasks.register('printVersion') {
     doLast {
-        println "${version}"
+        println project.version
     }
 }
 
