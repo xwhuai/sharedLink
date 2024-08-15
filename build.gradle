@@ -47,7 +47,6 @@ jlink {
         imageOptions += ['--icon', "src/main/resources/icons/icon.$imgType"]
         if (currentOs.windows) {
             installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu', '--win-shortcut']
-            imageOptions += ['--type', 'app-image']
         }
     }
 }
